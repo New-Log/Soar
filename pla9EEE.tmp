@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://rdhwgqhvu6an"]
+
+[ext_resource type="Script" path="res://platform.gd" id="1_tw48y"]
+[ext_resource type="Texture2D" uid="uid://dqh32y20bon7v" path="res://assets/textures/Bloom_Placeholder.png" id="2_433vf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcd56"]
+size = Vector2(162, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_85xm7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_433vf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="platform" type="AnimatableBody2D"]
+script = ExtResource("1_tw48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lcd56")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0.373316, 0.0134829, 1)
+position = Vector2(0, 2.98023e-08)
+scale = Vector2(162, 4)
+sprite_frames = SubResource("SpriteFrames_85xm7")

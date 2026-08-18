@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://0rvc151fdghn"]
+
+[ext_resource type="Texture2D" uid="uid://dqh32y20bon7v" path="res://assets/textures/Bloom_Placeholder.png" id="1_7j0oi"]
+[ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_ern4k"]
+[ext_resource type="Script" path="res://src/entities/player/idle.gd" id="3_6s2we"]
+[ext_resource type="Script" path="res://src/entities/player/state_machine.gd" id="3_eowyh"]
+[ext_resource type="Script" path="res://src/entities/player/jump.gd" id="5_xb3me"]
+[ext_resource type="Script" path="res://src/entities/player/dash_down.gd" id="6_jkib0"]
+[ext_resource type="Script" path="res://src/entities/player/move.gd" id="7_bfwsj"]
+[ext_resource type="Script" path="res://src/entities/player/dead.gd" id="8_vrpt8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rten0"]
+size = Vector2(6, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_so1ls"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7j0oi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_ern4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rten0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.76837e-07, 1.19209e-07)
+scale = Vector2(6, 12)
+sprite_frames = SubResource("SpriteFrames_so1ls")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
+process_mode = 3
+script = ExtResource("3_eowyh")
+start_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+process_mode = 1
+script = ExtResource("3_6s2we")
+player = NodePath("../..")
+
+[node name="Jump" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+process_mode = 1
+script = ExtResource("5_xb3me")
+player = NodePath("../..")
+jump_speed = -750
+gravity = 0.1
+
+[node name="Dash_Down" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+process_mode = 1
+script = ExtResource("6_jkib0")
+player = NodePath("../..")
+
+[node name="Move" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+process_mode = 1
+script = ExtResource("7_bfwsj")
+player = NodePath("../..")
+
+[node name="Dead" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+process_mode = 3
+script = ExtResource("8_vrpt8")
+player = NodePath("../..")
