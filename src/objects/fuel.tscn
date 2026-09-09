@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://badpd0pfccyen"]
+
+[ext_resource type="Script" path="res://src/objects/fuel.gd" id="1_4ncxq"]
+[ext_resource type="Texture2D" uid="uid://dqh32y20bon7v" path="res://assets/textures/Bloom_Placeholder.png" id="2_6pkep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ciwgy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ah2s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6pkep")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="fuel" type="Area2D"]
+script = ExtResource("1_4ncxq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ciwgy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.888252, 0, 0.132125, 1)
+scale = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_0ah2s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

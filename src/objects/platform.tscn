@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://rdhwgqhvu6an"]
+[gd_scene load_steps=6 format=3 uid="uid://rdhwgqhvu6an"]
 
 [ext_resource type="Script" path="res://src/objects/platform.gd" id="1_pl0yc"]
 [ext_resource type="Texture2D" uid="uid://dqh32y20bon7v" path="res://assets/textures/Bloom_Placeholder.png" id="2_w4xtq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lcd56"]
-size = Vector2(80, 4)
+size = Vector2(64, 4)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_85xm7"]
 animations = [{
@@ -17,6 +17,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epmrn"]
+size = Vector2(62, 4)
+
 [node name="platform" type="AnimatableBody2D" groups=["platforms"]]
 collision_layer = 3
 collision_mask = 3
@@ -26,7 +29,18 @@ script = ExtResource("1_pl0yc")
 shape = SubResource("RectangleShape2D_lcd56")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.905882, 1, 0.160784, 1)
 position = Vector2(0, 2.98023e-08)
-scale = Vector2(80, 4)
+scale = Vector2(64, 4)
 sprite_frames = SubResource("SpriteFrames_85xm7")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(56, 0)
+
+[node name="DashDown" type="Area2D" parent="."]
+position = Vector2(0, 2)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashDown"]
+shape = SubResource("RectangleShape2D_epmrn")
+
+[connection signal="body_entered" from="DashDown" to="." method="_on_dash_down_body_entered"]

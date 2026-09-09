@@ -11,6 +11,7 @@ func _on_play_pressed() -> void:
 
 func on_death():
 	$HUD/Control/RespawnContainer.show()
+	$Create.stop()
 
 func on_respawn() -> void:
 	$world.start_game()

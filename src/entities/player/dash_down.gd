@@ -2,7 +2,7 @@ extends State
 class_name Dash_Down
 
 @export var player:CharacterBody2D
-var dash_speed=900
+var dash_speed=1500
 
 
 func enter():

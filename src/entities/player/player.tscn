@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://0rvc151fdghn"]
+[gd_scene load_steps=15 format=3 uid="uid://0rvc151fdghn"]
 
 [ext_resource type="Texture2D" uid="uid://dqh32y20bon7v" path="res://assets/textures/Bloom_Placeholder.png" id="1_7j0oi"]
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_ern4k"]
@@ -8,9 +8,11 @@
 [ext_resource type="Script" path="res://src/entities/player/dash_down.gd" id="6_jkib0"]
 [ext_resource type="Script" path="res://src/entities/player/move.gd" id="7_bfwsj"]
 [ext_resource type="Script" path="res://src/entities/player/dead.gd" id="8_vrpt8"]
+[ext_resource type="Script" path="res://src/entities/player/rocket_jump.gd" id="9_poxgq"]
+[ext_resource type="Script" path="res://src/entities/player/god.gd" id="10_giktg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rten0"]
-size = Vector2(6, 12)
+size = Vector2(4, 12)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_so1ls"]
 animations = [{
@@ -23,7 +25,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_krwr2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y716g"]
+size = Vector2(6, 14)
+
 [node name="player" type="CharacterBody2D"]
+floor_max_angle = 1.38754
 script = ExtResource("1_ern4k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -31,10 +39,22 @@ shape = SubResource("RectangleShape2D_rten0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-4.76837e-07, 1.19209e-07)
-scale = Vector2(6, 12)
+scale = Vector2(4, 12)
 sprite_frames = SubResource("SpriteFrames_so1ls")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.9, 0.9)
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_krwr2")
+target_position = Vector2(0, 0)
+max_results = 7
+
+[node name="hit_detect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_detect"]
+shape = SubResource("RectangleShape2D_y716g")
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
 process_mode = 3
@@ -50,7 +70,7 @@ player = NodePath("../..")
 process_mode = 1
 script = ExtResource("5_xb3me")
 player = NodePath("../..")
-jump_speed = -750
+jump_speed = -600
 gravity = 0.1
 
 [node name="Dash_Down" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
@@ -67,3 +87,13 @@ player = NodePath("../..")
 process_mode = 3
 script = ExtResource("8_vrpt8")
 player = NodePath("../..")
+
+[node name="Rocket_Jump" type="Node" parent="state_machine"]
+script = ExtResource("9_poxgq")
+
+[node name="God" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_giktg")
+player = NodePath("../..")
+
+[connection signal="area_entered" from="hit_detect" to="." method="_on_hit_detect_area_entered"]
+[connection signal="body_entered" from="hit_detect" to="." method="_on_hit_detect_body_entered"]

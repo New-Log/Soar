@@ -26,7 +26,5 @@ func on_change(state, new_state_name):
 		current_state.exit()
 	new_state.enter()
 	current_state=new_state
-
-func force_update(state):
-	var new_state = states.get(state)
-	current_state=new_state
+	
+	

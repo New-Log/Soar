@@ -25,7 +25,6 @@ func move(delta:float):
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name=="player":
-		print(body.velocity)
 		if body.velocity.y==0:
 			die()
 		else:

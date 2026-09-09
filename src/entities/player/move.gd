@@ -2,14 +2,16 @@ extends State
 class_name Move
 
 @export var player:CharacterBody2D
-var speed:float=400
+var speed:float=450
 
 func physics_update(delta:float):
 	#if Input.is_action_just_released("jump"):
 		#player.velocity.y=player.old_y
 		#Global.slow_factor=1
+	if player.health<=0:
+		change.emit(self,"Dead")
 	if Input.is_action_just_pressed("jump"):
-		if player.is_on_floor():
+		if player.is_on_floor() or ($"../../ShapeCast2D".is_colliding() and $"../../ShapeCast2D".get_collider(0).global_rotation_degrees==90):
 			change.emit(self,"Jump")
 		#player.old_y=player.velocity.y
 	#if Input.is_action_pressed("jump") and player.time_juice>0 and player.is_on_floor():
@@ -20,13 +22,17 @@ func physics_update(delta:float):
 
 	if Input.is_action_just_pressed("dash_down"):
 		change.emit(self,"Dash_Down")
+	#if Input.is_action_just_pressed("rocket") and player.collected==3:
+		#change.emit(self,"Rocket_Jump")
 	if Input.is_action_pressed("left"):
-		player.velocity.x=lerp(player.velocity.x,-speed,15*delta)
+		player.velocity.x=lerp(player.velocity.x,-speed,10*delta)
 	elif Input.is_action_pressed("right"):
-		player.velocity.x=lerp(player.velocity.x,speed,15*delta)
+		player.velocity.x=lerp(player.velocity.x,speed,10*delta)
 	else:
 		player.velocity.x=lerp(player.velocity.x,0.0,25*delta)
 	if player.velocity.x==0:
 		change.emit(self,"Idle")
+	if Input.is_action_just_pressed("god"):
+		change.emit(self,"God")
 
 		
