@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bmarreekjxu4x"]
+[gd_scene load_steps=16 format=4 uid="uid://bmarreekjxu4x"]
 
 [ext_resource type="Script" path="res://src/origin/main.gd" id="1_jrpns"]
 [ext_resource type="Script" path="res://src/world.gd" id="2_og020"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://0rvc151fdghn" path="res://src/entities/player/player.tscn" id="5_66kql"]
 [ext_resource type="PackedScene" uid="uid://rdhwgqhvu6an" path="res://src/objects/platform.tscn" id="6_u0qk8"]
 [ext_resource type="PackedScene" uid="uid://fvfv2fq2kaih" path="res://src/entities/enemy.tscn" id="7_cttne"]
+[ext_resource type="Texture2D" uid="uid://bilyl72i8qpia" path="res://assets/icons/soar_background.png" id="8_wadny"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_du73v"]
 texture = ExtResource("3_2wxv8")
@@ -14,7 +15,7 @@ texture = ExtResource("3_2wxv8")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_svoyq"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
 sources/0 = SubResource("TileSetAtlasSource_du73v")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d73jo"]
@@ -63,7 +64,7 @@ position = Vector2(0, -8.5)
 [node name="Campaign" type="Node2D" parent="world"]
 
 [node name="map" type="TileMapLayer" parent="world/Campaign"]
-z_index = 1
+z_index = 2
 tile_map_data = PackedByteArray("AADx/wAAAAAAAAAAAADx/wEAAAAAAAAAAADx/wIAAAAAAAAAAADx/wMAAAAAAAAAAADx/wQAAAAAAAAAAADx/wUAAAAAAAAAAADx/wYAAAAAAAAAAADx/wcAAAAAAAAAAADx/wgAAAAAAAAAAADx/wkAAAAAAAAAAADx/woAAAAAAAAAAADx/wsAAAAAAAAAAADx/wwAAAAAAAAAAADx/w0AAAAAAAAAAADx/w4AAAAAAAAAAADx/w8AAAAAAAAAAADx/xAAAAAAAAAAAADx/xEAAAAAAAAAAADx/xIAAAAAAAAAAADx/xMAAAAAAAAAAADx/xQAAAAAAAAAAADx/xUAAAAAAAAAAADx/xYAAAAAAAAAAADx/xcAAAAAAAAAAADx/xgAAAAAAAAAAADx/xkAAAAAAAAAAADx/xoAAAAAAAAAAADx/xsAAAAAAAAAAADx/xwAAAAAAAAAAADx/x0AAAAAAAAAAADx/x4AAAAAAAAAAADx/x8AAAAAAAAAAADx/yAAAAAAAAAAAADx/yEAAAAAAAAAAADx/yIAAAAAAAAAAADx/yMAAAAAAAAAAADx/yQAAAAAAAAAAADx/yUAAAAAAAAAAADx/yYAAAAAAAAAAADx/ycAAAAAAAAAAADx/ygAAAAAAAAAAADx/ykAAAAAAAAAAADx/yoAAAAAAAAAAADx/ysAAAAAAAAAAADx/ywAAAAAAAAAAADx/y0AAAAAAAAAAADx/y4AAAAAAAAAAADx/y8AAAAAAAAAAADx/zAAAAAAAAAAAADx/zEAAAAAAAAAAADx/zIAAAAAAAAAAADx/zMAAAAAAAAAAADx/zQAAAAAAAAAAADx/zUAAAAAAAAAAADx/zYAAAAAAAAAAADx/zcAAAAAAAAAAADx/zgAAAAAAAAAAADx/zkAAAAAAAAAAADx/zoAAAAAAAAAAADx/zsAAAAAAAAAAADx/zwAAAAAAAAAAADx/z0AAAAAAAAAAADx/z4AAAAAAAAAAADx/z8AAAAAAAAAAADx/0AAAAAAAAAAAAAPAAAAAAAAAAAAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAsAAAAAAAAAAAAPAAwAAAAAAAAAAAAPAA0AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA8AAAAAAAAAAAAPABAAAAAAAAAAAAAPABEAAAAAAAAAAAAPABIAAAAAAAAAAAAPABMAAAAAAAAAAAAPABQAAAAAAAAAAAAPABUAAAAAAAAAAAAPABYAAAAAAAAAAAAPABcAAAAAAAAAAAAPABgAAAAAAAAAAAAPABkAAAAAAAAAAAAPABoAAAAAAAAAAAAPABsAAAAAAAAAAAAPABwAAAAAAAAAAAAPAB0AAAAAAAAAAAAPAB4AAAAAAAAAAAAPAB8AAAAAAAAAAAAPACAAAAAAAAAAAAAPACEAAAAAAAAAAAAPACIAAAAAAAAAAAAPACMAAAAAAAAAAAAPACQAAAAAAAAAAAAPACUAAAAAAAAAAAAPACYAAAAAAAAAAAAPACcAAAAAAAAAAAAPACgAAAAAAAAAAAAPACkAAAAAAAAAAAAPACoAAAAAAAAAAAAPACsAAAAAAAAAAAAPACwAAAAAAAAAAAAPAC0AAAAAAAAAAAAPAC4AAAAAAAAAAAAPAC8AAAAAAAAAAAAPADAAAAAAAAAAAAAPADEAAAAAAAAAAAAPADIAAAAAAAAAAAAPADMAAAAAAAAAAADx////AAAAAAAAAADx//7/AAAAAAAAAADx//3/AAAAAAAAAADx//z/AAAAAAAAAADx//v/AAAAAAAAAADx//r/AAAAAAAAAADx//n/AAAAAAAAAADx//j/AAAAAAAAAADx//f/AAAAAAAAAADx//b/AAAAAAAAAADx//X/AAAAAAAAAADx//T/AAAAAAAAAADx//P/AAAAAAAAAADx//L/AAAAAAAAAADx//H/AAAAAAAAAADx//D/AAAAAAAAAADx/+//AAAAAAAAAADx/+7/AAAAAAAAAADx/+3/AAAAAAAAAADx/+z/AAAAAAAAAADx/+v/AAAAAAAAAADx/+r/AAAAAAAAAADx/+n/AAAAAAAAAADx/+j/AAAAAAAAAADx/+f/AAAAAAAAAADx/+b/AAAAAAAAAAAPAP//AAAAAAAAAAAPAP7/AAAAAAAAAAAPAP3/AAAAAAAAAAAPAPz/AAAAAAAAAAAPAPv/AAAAAAAAAAAPAPr/AAAAAAAAAAAPAPn/AAAAAAAAAAAPAPj/AAAAAAAAAAAPAPf/AAAAAAAAAAAPAPb/AAAAAAAAAAAPAPX/AAAAAAAAAAAPAPT/AAAAAAAAAAAPAPP/AAAAAAAAAAAPAPL/AAAAAAAAAAAPAPH/AAAAAAAAAAAPAPD/AAAAAAAAAAAPAO//AAAAAAAAAAAPAO7/AAAAAAAAAAAPAO3/AAAAAAAAAAAPAOz/AAAAAAAAAAAPAOv/AAAAAAAAAAAPAOr/AAAAAAAAAAAPAOn/AAAAAAAAAAAPAOj/AAAAAAAAAAAPAOf/AAAAAAAAAAAPAOb/AAAAAAAAAAAPAOX/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_svoyq")
 
@@ -72,6 +73,7 @@ z_index = -1
 position = Vector2(187, 2.99998)
 rotation = 1.5708
 scale = Vector2(1.38317, 5.7075)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="world/Campaign/Start_platform"]
 position = Vector2(-2, 32.8353)
@@ -88,8 +90,10 @@ sprite_frames = SubResource("SpriteFrames_6wvcu")
 [node name="bramble" type="Area2D" parent="world/Campaign"]
 z_index = 12
 position = Vector2(0, 160)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="world/Campaign/bramble"]
+position = Vector2(0, 8)
 shape = SubResource("WorldBoundaryShape2D_gwbbf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="world/Campaign/bramble"]
@@ -101,6 +105,7 @@ sprite_frames = SubResource("SpriteFrames_4ml5q")
 [node name="Endless" type="Node2D" parent="world"]
 
 [node name="Sprite2D" type="Sprite2D" parent="world"]
+visible = false
 z_index = -30
 position = Vector2(435, -1761)
 scale = Vector2(268.5, 264)
@@ -119,26 +124,35 @@ position = Vector2(120, -77)
 
 [node name="Control" type="Control" parent="HUD"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1040.0
+offset_bottom = -680.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="RespawnContainer" type="VBoxContainer" parent="HUD/Control"]
 visible = false
-layout_mode = 0
-offset_left = 176.0
-offset_top = 192.0
-offset_right = 974.0
-offset_bottom = 302.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.6
+anchor_top = 5.0
+anchor_right = 24.85
+anchor_bottom = 8.9
+offset_left = 0.999992
+offset_top = -8.0
+offset_bottom = -3.05176e-05
 alignment = 1
 
 [node name="DeathMessage" type="Label" parent="HUD/Control/RespawnContainer"]
 modulate = Color(0.720955, 0, 0.113578, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-text = "Nobody's Perfect
+text = "Get Higher
 "
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RespawnButton" type="Button" parent="HUD/Control/RespawnContainer"]
 layout_mode = 2
@@ -164,11 +178,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 10.225
 anchor_top = 5.0
-anchor_right = 19.0
-anchor_bottom = 13.4
+anchor_right = 19.2
+anchor_bottom = 10.6
 offset_top = -8.0
-offset_right = 8.99988
-offset_bottom = -112.0
+offset_right = 0.999878
 alignment = 1
 
 [node name="Title" type="Label" parent="Title/Control/TitleContainer"]
@@ -197,10 +210,10 @@ anchors_preset = -1
 anchor_left = 10.225
 anchor_top = 7.65
 anchor_right = 19.2
-anchor_bottom = 13.8
+anchor_bottom = 10.7
 offset_top = 3.99997
 offset_right = 71.0
-offset_bottom = -124.0
+offset_bottom = -3.05176e-05
 scale = Vector2(0.837548, 1)
 alignment = 1
 
@@ -222,7 +235,24 @@ position = Vector2(115, -89)
 
 [node name="Create" type="Timer" parent="."]
 process_callback = 0
-wait_time = 3.0
+wait_time = 0.6
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
+texture_repeat = 2
+custom_minimum_size = Vector2(10, 0)
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.033
+anchor_right = 0.147
+anchor_bottom = 0.211
+offset_left = -4736.4
+offset_top = -1.77018e+06
+offset_right = -4749.76
+offset_bottom = -1.7503e+06
+scale = Vector2(90, 90)
+texture = ExtResource("8_wadny")
+stretch_mode = 1
 
 [connection signal="area_entered" from="world/Campaign/bramble" to="world" method="_on_bramble_area_entered"]
 [connection signal="body_entered" from="world/Campaign/bramble" to="world" method="_on_bramble_body_entered"]

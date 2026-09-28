@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://0rvc151fdghn"]
+[gd_scene load_steps=16 format=3 uid="uid://0rvc151fdghn"]
 
-[ext_resource type="Texture2D" uid="uid://dqh32y20bon7v" path="res://assets/textures/Bloom_Placeholder.png" id="1_7j0oi"]
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="1_ern4k"]
+[ext_resource type="Texture2D" uid="uid://ba15gmnd4iilt" path="res://assets/icons/default.png" id="2_bvig7"]
 [ext_resource type="Script" path="res://src/entities/player/idle.gd" id="3_6s2we"]
 [ext_resource type="Script" path="res://src/entities/player/state_machine.gd" id="3_eowyh"]
+[ext_resource type="Texture2D" uid="uid://dimgvt0xf2x33" path="res://assets/icons/rocket_jump.png" id="3_snmgl"]
 [ext_resource type="Script" path="res://src/entities/player/jump.gd" id="5_xb3me"]
 [ext_resource type="Script" path="res://src/entities/player/dash_down.gd" id="6_jkib0"]
 [ext_resource type="Script" path="res://src/entities/player/move.gd" id="7_bfwsj"]
@@ -18,19 +19,29 @@ size = Vector2(4, 12)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_7j0oi")
+"texture": ExtResource("2_bvig7")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_snmgl")
+}],
+"loop": true,
+"name": &"rocket_jump",
+"speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_krwr2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obc4d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y716g"]
 size = Vector2(6, 14)
 
 [node name="player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 floor_max_angle = 1.38754
 script = ExtResource("1_ern4k")
 
@@ -38,18 +49,18 @@ script = ExtResource("1_ern4k")
 shape = SubResource("RectangleShape2D_rten0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-4.76837e-07, 1.19209e-07)
-scale = Vector2(4, 12)
+position = Vector2(8.9407e-08, -1.2666e-06)
+scale = Vector2(0.5, 0.7)
 sprite_frames = SubResource("SpriteFrames_so1ls")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.9, 0.9)
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
-scale = Vector2(1.5, 1.5)
-shape = SubResource("CircleShape2D_krwr2")
+visible = false
+scale = Vector2(1.8, 1.8)
+shape = SubResource("RectangleShape2D_obc4d")
 target_position = Vector2(0, 0)
-max_results = 7
 
 [node name="hit_detect" type="Area2D" parent="."]
 
@@ -88,8 +99,9 @@ process_mode = 3
 script = ExtResource("8_vrpt8")
 player = NodePath("../..")
 
-[node name="Rocket_Jump" type="Node" parent="state_machine"]
+[node name="Rocket_Jump" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
 script = ExtResource("9_poxgq")
+player = NodePath("../..")
 
 [node name="God" type="Node" parent="state_machine" node_paths=PackedStringArray("player")]
 script = ExtResource("10_giktg")

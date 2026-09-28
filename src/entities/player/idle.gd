@@ -1,7 +1,7 @@
 extends State
 class_name Idle
 @export var player:CharacterBody2D
-
+var time_held_rocket:float=0
 
 
 func physics_update(delta:float):
@@ -13,6 +13,15 @@ func physics_update(delta:float):
 	if Input.is_action_just_pressed("jump"):
 		if player.is_on_floor() or ($"../../ShapeCast2D".is_colliding() and  $"../../ShapeCast2D".get_collider(0).global_rotation_degrees==90):
 			change.emit(self,"Jump")
+		#elif Input.is_action_pressed("jump") and player.power_up==1:
+			#change.emit(self,"Rocket_Jump")
+
+	if Input.is_action_pressed("jump") and player.power_up==1:
+		time_held_rocket+=delta
+	if Input.is_action_just_released("jump"):
+		if time_held_rocket>.3:
+			change.emit(self,"Rocket_Jump")
+		time_held_rocket=0
 
 	if Input.is_action_just_pressed("dash_down"):
 		change.emit(self,"Dash_Down")

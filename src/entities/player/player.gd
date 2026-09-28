@@ -8,38 +8,42 @@ var health:int=3
 var dead:bool=false
 var squashed:bool=false
 var old_y:int
-var collected:int = 0
-var destroying:bool=false
+var destroying:bool=false 
+var power_up:int = 0 #number determines what power_up it is. 1 means rocket jump
 func move(delta:float):
 	#if health==0:
 		#die()
 	if !is_on_floor():
 		velocity.y=lerp(velocity.y,1200.0,gravity*delta*Global.slow_factor)
+	if !get_collision_mask_value(1) and velocity.y>-150:
+		normalize()
 	move_and_slide()
 
 
 func reset():
-	collected=0
+	normalize()
+	$AnimatedSprite2D.animation="default"
 	dead=false
 	health=3
+	power_up=0
 	velocity=Vector2.ZERO
 	position=Vector2(0,-8.5)
 	modulate=Color.WHITE
 
 func _on_hit_detect_area_entered(area: Area2D) -> void:
-	if area is fuel and collected<3:
-		print(area)
-		collected+=1
-		if collected==3:
-			modulate=Color.RED
+	if area is fuel:
+		power_up=1
+		$AnimatedSprite2D.animation="rocket_jump"
 		area.queue_free()
-
+		fuel.fuel_array.erase(area)
+		
 func _on_hit_detect_body_entered(body: Node2D) -> void:
-	if destroying:
-		if body is platform and body.global_rotation_degrees!=90:
-			body.queue_free()
-			destroying=false
-			modulate=Color.WHITE
+	if !get_collision_mask_value(1) and body is platform:
+		body.queue_free()
+
+func normalize():
+	modulate=Color.WHITE
+	set_collision_mask_value(1, true)
 #func die():
 	#Global.died.emit()
 	#dead=true

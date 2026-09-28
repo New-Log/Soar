@@ -6,6 +6,7 @@ static var fuel_array:Array
 
 static func create():
 	var new_fuel=scene.instantiate()
+	fuel_array.append(new_fuel)
 	return new_fuel
 #
 #func generate():
@@ -14,9 +15,7 @@ static func create():
 	
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.name=="player" and body.collected<3:
-		body.collected+=1
-		if body.collected==3:
-			body.modulate=Color.RED
-		queue_free()
+#func _on_body_entered(body: Node2D) -> void:
+	#if body.name=="player":
+		#body.modulate=Color.RED
+		#queue_free()
